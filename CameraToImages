@@ -1,0 +1,17 @@
+clc; close all;
+vid = videoinput('winvideo', 1, 'YUY2_640x480');
+set(vid,'ReturnedColorSpace','rgb');
+vidRes=get(vid,'VideoResolution');
+width=vidRes(1);
+height=vidRes(2);
+nBands=get(vid,'NumberOfBands');
+figure('Name', 'Matlab code By Lyqmath', 'NumberTitle', 'Off', 'ToolBar', 'None', 'MenuBar', 'None');
+hImage=image(zeros(vidRes(2),vidRes(1),nBands));
+path = './victor/'
+preview(vid,hImage);
+nframe = 300; % define the number of frames
+for ii = 1: nframe
+    frame = getsnapshot(vid);
+    imwrite(frame ,strcat(path,num2str(ii),'.jpg'));
+    pause(0.05);
+end
